@@ -261,4 +261,8 @@ class FakeWebAuthentication implements IWebAuthentication
     {
         return '';
     }
+
+    public function postLogout(UserSession $user)
+    {
+    }
 }

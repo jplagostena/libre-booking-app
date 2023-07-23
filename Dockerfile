@@ -1,4 +1,4 @@
-FROM php:8.2.1RC1-apache
+FROM php:8.2-apache-bullseye
 
 ARG DB_HOST=mysql
 ARG DB_USER=librebooking
@@ -25,10 +25,16 @@ COPY . /var/www/librebooking/
 COPY entrypoint.sh /
 RUN sed -i "s#DocumentRoot /var/www/html#DocumentRoot /var/www/librebooking#" /etc/apache2/sites-enabled/000-default.conf
 RUN a2enmod rewrite
-RUN docker-php-ext-install mysqli
 
-WORKDIR /var/www/librebooking
+WORKDIR /var/www/librebooking/
 RUN mkdir -p tpl_c tpl uploads
 RUN chown -R www-data:www-data tpl_c tpl uploads
+
+RUN apt-get -y update && apt-get install -y libzip-dev zip libpng-dev wget gnupg
+RUN docker-php-ext-install mysqli gd
+
+COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
+
+RUN composer --no-interaction install
 
 CMD /entrypoint.sh

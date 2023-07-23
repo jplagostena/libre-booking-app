@@ -48,12 +48,16 @@ class FakePaymentRepository implements IPaymentRepository
         $this->_CreditCost = new CreditCost();
     }
 
-    public function UpdateCreditCost(CreditCost $cost)
+    public function DeleteCreditCost($creditCount)
+    {
+    }
+
+    public function UpdateCreditCost($cost)
     {
         $this->_LastCost = $cost;
     }
 
-    public function GetCreditCost()
+    public function GetCreditCosts()
     {
         return $this->_CreditCost;
     }

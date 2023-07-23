@@ -62,3 +62,5 @@
 
 # php8 phpcompatibility report
 php8-report.log
+
+*.log   
