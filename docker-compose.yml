@@ -15,7 +15,7 @@ services:
       - MYSQL_ROOT_PASSWORD=rootpass
     networks:
       - librebooking
-
+    
   lb:
     build: .
     restart: always
@@ -33,7 +33,7 @@ services:
       - librebooking
     volumes:
     #montar carpeta de logs
-      - ./logs:/var/www/librebooking/logs
+      - ./logs:/var/log/librebooking/logs
 
 networks:
   librebooking:

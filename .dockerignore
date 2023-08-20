@@ -1,1 +1,20 @@
-docker
+# git
+.git
+.gitattributes
+.gitignore
+
+#docker 
+docker-compose.yml
+Dockerfile
+/docker
+
+#documentacion
+*.md
+
+#ides
+.vscode
+.editorconfig
+.php-cs-fixer.dist.php
+LibreBooking.sublime-project
+LibreBooking.code-workspace
+phpStormSettings.jar

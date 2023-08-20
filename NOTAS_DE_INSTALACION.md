@@ -2,14 +2,13 @@
 
 ## Instalación
 
-- Configurar la base de datos
-- modificar el Dockerfile para poder correr composer y sus dependencias
-- cambiar user y passwords de database en docker-compose por los de root para facilitar la puesta de prueba
-- meterse dentro del contenedor y ejecutar composer install
-- ir http://HOST:PUERTO/Web/install/configure.php, tener el valor de settings install.password a mano (ojo que la entrada puede estar duplicada)
-- cambiar la carpeta de logs para alguna que se tenga permiso
-- ahora si ir a http://HOST:PUERTO/Web/install/
-- cambiar la script.url setting a http://HOST:PUERTO:8080/Web y el default.language a "es"
-- clickear en creacion de base de datos y usuario en la web de instalación
-- al darle click debería correr las migraciones
-- mover el install a otro directorio, para que no vuelvan a ejecutarse
+- correr `docker compose up`
+- instalar base de datos en http://HOST:PORT/Web/install/index.php
+- clickear en creacion de base de datos y usuario en la web de instalación, al darle Aceptar, debería correr las migraciones que crean nuestro esquema
+- configurar en http://HOST:PORT/Web/install/configure.php (password: hdLbzuZMHNYUJRzE)
+
+## Anotaciones
+
+- el docker compose incluye una base de datos MariaDB, se puede configurar otra en tanto y cuanto se llegue desde el contenedor.
+- también se monta como volumen la carpeta de los logs, para que sean persistentes. Ojo esta carpeta tiene que ser accesible por el usuario www-data del contenedor (o sea, 777 o un uuid/gid adecuado, recordando que los ids en docker se mantienen entre host y contenedor).
+- una vez que sepamos que está andando, mover el install a otro directorio (o directamente eliminarlo), para que no vuelvan a ejecutarse (esto se puede hacer con `docker compose exec lb rm -rf /var/www/librebooking/Web/install`)
